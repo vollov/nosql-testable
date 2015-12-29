@@ -1,0 +1,13 @@
+
+class Fixture():
+
+	def load(self, file_name):
+		'''
+		1) parse file_name without json extension
+		2) parse file as json objects 
+		3) load json file into db
+		'''
+		pass
+		
+	def dump()
+	
