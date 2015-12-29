@@ -18,7 +18,7 @@ class TestFixture(unittest.TestCase):
         pass
     
     def test__parse_file_name(self):
-        collection_name = self.fixture._load_json_file('user.json')
+        collection_name = self.fixture._parse_file_name('user.json')
         expected_collection_name = 'user'
         self.assertEquals(collection_name,expected_collection_name,'parse_file_name should return ' + expected_collection_name)
     

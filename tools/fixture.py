@@ -7,7 +7,7 @@ class Fixture():
 
     def __init__(self):
         base_dir = app_settings.BASE_DIR
-        self.data_dir = os.path.join(base_dir, 'data')
+        self.data_dir = os.path.join(base_dir,'tests','data')
         
         
     def load(self, json_file_name):
