@@ -14,7 +14,7 @@ default destination directory is BASE_DIR/tests/data
 
 from argparse import ArgumentParser
 import argparse, sys
-
+from tools.fixture import Fixture
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser(description='mongodb seeding processor')
@@ -25,14 +25,17 @@ if __name__=='__main__':
     
     args = parser.parse_args()   
     
+    fixture = Fixture()
     # db_name set in settings.py
     #db_name = args.d
 
     # print 'args={0}'.format(vars(args))
     # print 'db_name={0}'.format(db_name)
     if args.i:
-        #print 'import collection = {0}'.format(args.i)
+        #print 'import collection = {0}'.format(args.i)\
+        fixture.load(args.i)
         parser.exit()
     if args.e:
         #print 'export collection = {0}'.format(args.e)
+        fixture.dump(args.e)
         parser.exit()

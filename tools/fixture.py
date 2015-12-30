@@ -1,8 +1,16 @@
 
 import settings as app_settings
-import os, json
+import os, json, ast
 
 from nosql.mongo import DBManager
+
+from bson import ObjectId
+
+class JSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, ObjectId):
+            return str(o)
+        return json.JSONEncoder.default(self, o)
 
 class Fixture():
 
@@ -21,8 +29,8 @@ class Fixture():
         
         docs = self._load_json_file(collection_name)
         print 'import collection = {0}'.format(collection_name)
-        #db_handler = DBManager.get_connection()
-        #db_handler[collection_name].insert(docs, safe=True)
+        db_handler = DBManager.get_connection()
+        db_handler[collection_name].insert_many(docs)
         
 #     def _parse_file_name(self, file_base_name):
 #         '''
@@ -41,8 +49,18 @@ class Fixture():
         with open(json_file_path) as file_handler:    
             data = json.load(file_handler)
         
-        return data
+        collection = []
+        for item in data:
+            collection.append(self._load_object_id(item))
+        return collection
     
+    def _load_object_id(self, item):
+        item = ast.literal_eval(item)
+        #print type(item), item['_id']
+        if item['_id']:
+            item['_id'] = ObjectId(item['_id'])
+        return item
+
     def dump(self, collection_name):
         '''
         write collection into a json file
@@ -50,5 +68,19 @@ class Fixture():
         1) read collections
         2) write collections into json file
         '''
-        pass
+
+        print 'export collection = {0}'.format(collection_name)
+        
+        json_file_name = collection_name + '.json'
+        json_file_path = os.path.join(self.data_dir, json_file_name)
+
+        db_handler = DBManager.get_connection()
+        iterator = db_handler[collection_name].find()
+        collection = []
+        for item in iterator:
+            item = JSONEncoder().encode(item)
+            collection.append(item)
+        
+        with open(json_file_path, 'w') as file_handler:
+            json.dump(collection, file_handler)
         
