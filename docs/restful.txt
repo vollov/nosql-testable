@@ -1,0 +1,31 @@
+I have written several tutorials on RESTful APIs with Flask, all with examples that are ready to use:
+
+http://blog.miguelgrinberg.com/category/REST
+
+The tutorials are:
+
+Designing a RESTful API with Python and Flask
+
+This is a simple RESTful API written in Flask, with authentication.
+
+Writing a Javascript REST client
+
+In this one I implement a Javascript client for the API built in the first tutorial. Here you can see how the client authenticates. I used Knockout instead of Angular for the client, but the principles are the same.
+
+Designing a RESTful API using Flask-RESTful
+
+This one is another way to write the server, using the Flask-RESTful extension to simplify some tasks.
+
+RESTful Authentication with Flask
+
+This is a tutorial specifically dedicated to authentication.
+
+I hope they are useful.
+
+
+==============
+
+https://github.com/miguelgrinberg/REST-auth/blob/master/api.py
+
+http://python-eve.org/authentication.html
+

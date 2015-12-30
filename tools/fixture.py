@@ -56,10 +56,15 @@ class Fixture():
     
     def _load_object_id(self, item):
         item = ast.literal_eval(item)
-        #print type(item), item['_id']
+        
+        # if item has '_id' convert _id string to ObjectId
         if item['_id']:
             item['_id'] = ObjectId(item['_id'])
+            
         return item
+
+    def _encrypt_password(self, item):
+        pass
 
     def dump(self, collection_name):
         '''

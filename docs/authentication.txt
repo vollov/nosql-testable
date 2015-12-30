@@ -1,0 +1,39 @@
+[1] to save pwd
+
+web app					middle ware									database
+------------           ----------------							-------------------
+pwd_str ->				import bcrypt
+						salt = bcrypt.gensalt()						save(hash)
+						hash = bcrypt.hashpw('secret', salt)
+						
+						
+pwd_str ->															
+						hash = bcrypt.hashpw(pwd_str, pwd) <-  pwd =get_pwd()
+						if hash == pwd: pass
+						
+=====================================	
+import bcrypt
+from getpass import getpass
+master_secret_key = getpass('tell me the master secret key you are going to use')
+salt = bcrypt.gensalt()
+combo_password = raw_password + salt + master_secret_key
+hashed_password = bcrypt.hashpw(combo_password, salt)
+=====================================
+
+I don't know how you use mongodb to bring the data, but if you want to hash the pass it's as easy as:
+
+from flask import Flask
+from flask.ext.bcrypt import Bcrypt
+
+app = Flask(__name__)
+bcrypt = Bcrypt(app)
+
+# Your code here...
+
+users_doc = {
+    "username": "james",
+    "password": bcrypt.generate_password_hash(password)
+}
+And then if you want to check the password, you can use the check_password_hash() function:
+
+bcrypt.check_password_hash(users_doc["password"], request.form["password"]) # Just an examp

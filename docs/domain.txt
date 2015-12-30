@@ -1,0 +1,68 @@
+BOLB_TYPE_CODE
+
+CODE/CLASS_NAME/
+
+
+Policy
+-------------------------
+insured_name
+version: Current
+policy_num 20001896
+policy_term 2016-05-15 to 2017-05-15
+last_transaction_date
+province ON
+payment_type:
+
+insurer: ABC
+province_of_rating: ON
+line_of_business: commercial
+
+policy_effective_date
+policy_expiry_date
+entry_date
+
+Insured
+-----
+first_name
+last_name
+date_of_birth
+postal_ddress
+phone
+
+Driver
+---------------------
+first_name
+last_name
+date_of_birth
+driver_license
+province_of_license
+gender
+
+Rating information
+---------------------
+date_fully_licensed
+
+Driver's address
+---------------------
+postal_code
+street
+city
+country
+province
+
+vehicle
+--------------------------
+vin
+model_year
+model
+make
+location(Address)
+
+vehicle_coverage
+--------------------------
+liability
+DCPD
+Accident Benefits
+All perils
+ Comprehensive
+  Collision
