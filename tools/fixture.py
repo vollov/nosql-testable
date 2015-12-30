@@ -1,7 +1,8 @@
 
 import settings as app_settings
 import os, json
-from os.path import basename
+
+from nosql.mongo import DBManager
 
 class Fixture():
 
@@ -18,13 +19,15 @@ class Fixture():
         3) load json file into db
         '''
         collection_name = self._parse_file_name(json_file_name)
+        docs = self._load_json_file(json_file_name)
+        db_handler = DBManager.get_connection()
+        db_handler[collection_name].insert(docs, safe=True)
         
-        
-    def _parse_file_name(self, json_file_name):
+    def _parse_file_name(self, file_base_name):
         '''
         get collection name: e.g. parse user.json to user
         '''
-        return basename(json_file_name)
+        return os.path.splitext(file_base_name)[0]
         
     def _load_json_file(self, json_file_name):
         '''load a json file into memeory

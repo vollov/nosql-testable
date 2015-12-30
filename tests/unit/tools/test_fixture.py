@@ -22,3 +22,7 @@ class TestFixture(unittest.TestCase):
         expected_collection_name = 'user'
         self.assertEquals(collection_name,expected_collection_name,'parse_file_name should return ' + expected_collection_name)
     
+    def test__load_json_file(self):
+        data = self.fixture._load_json_file('user.json')
+        expected_size = 3
+        self.assertEquals(len(data),expected_size,'collection size should be {0}'.format(expected_size))
