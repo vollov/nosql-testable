@@ -11,23 +11,43 @@ PUT        api/v1.0/account/[oid]        - Update an existing account
 DELETE     api/v1.0/account/[oid]        - Delete a account
 '''
 
-accounts = [
-{ 'id': '1', "name" : "dave", "phone" : "416-113-2345", "address" : "55 king st, n2p 2e3"},
-{ 'id': '2', "name" : "martin", "phone" : "416-223-1678", "address" : "66 king st, n2p 2e3"},
-{ 'id': '3', "name" : "anna", "phone" : "519-223-2345", "address" : "77 king st, n2p 2e3"}
-]
-
-from flask import Blueprint, jsonify, abort
+from flask import Blueprint, jsonify, abort, json
+from nosql.mongo import DBManager
+from bson import ObjectId
+from utils.json_util import JsonUtil
 
 account_api = Blueprint('account_api', __name__)
 
-@account_api.route('/api/v1.0/accounts/<oid>', methods=['GET'])
-def get_account(oid):
-    account = [account for account in accounts if account['id'] == oid]
-    if len(account) == 0:
-        abort(404)
-    return jsonify({'account': account[0]})
+def get_account_by_name(name):
+    pass
 
-@account_api.route('/api/v1.0/accounts', methods=['GET'])
+@account_api.route('/api/v1.0/account/<oid>', methods=['GET'])
+def get_account(oid):
+    db_handler = DBManager.get_connection()
+    account = db_handler['user'].find_one({"_id": ObjectId(oid)})
+    
+    if not account:
+        abort(404)
+    
+    account = JsonUtil.itemToStr(account)
+    return jsonify({'account': account})
+
+@account_api.route('/api/v1.0/account', methods=['GET'])
 def get_accounts():
+    db_handler = DBManager.get_connection()
+    cursor = db_handler['user'].find()
+    
+    accounts = JsonUtil.listToStr(cursor)
+    
+    #accounts = json.dumps(cursor)
+    return jsonify({'accounts': accounts})
+
+@account_api.route('/api/v1.0/public/account', methods=['GET'])
+def get_public_accounts():
+    db_handler = DBManager.get_connection()
+    cursor = db_handler['user'].find(projection=['_id','name'])
+
+    accounts = JsonUtil.listToStr(cursor)
+
+    #accounts = json.dumps(cursor)
     return jsonify({'accounts': accounts})
