@@ -11,8 +11,8 @@ app = Flask(__name__)
 
 def register_blueprints(application):
 
-    from api import account
-    application.register_blueprint(account)
+    from api.account import account_api
+    application.register_blueprint(account_api)
     
     
 @app.route('/')
