@@ -10,7 +10,6 @@ PUT        api/v1.0/tasks/[task_id]        - Update an existing task
 DELETE     api/v1.0/tasks/[task_id]        - Delete a task
 '''
 
-#!flask/bin/python
 from flask import Flask, jsonify, make_response, abort, request, json
 
 app = Flask(__name__)
