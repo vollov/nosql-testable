@@ -11,6 +11,9 @@ pwd_str ->
 						hash = bcrypt.hashpw(pwd_str, pwd) <-  pwd =get_pwd()
 						if hash == pwd: pass
 						
+						
+DB size						
+database char(60) field, 1M user x 60 byte = 60000 KB = 60MB
 =====================================	
 import bcrypt
 from getpass import getpass

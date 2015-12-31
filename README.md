@@ -4,6 +4,7 @@ python project for testable policy manager
 ##Encryption
 apt-get install build-essential libffi-dev python-dev
 pip install bcrypt
+pip install itsdangerous
 
 ##MongoDB
 

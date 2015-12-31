@@ -1,0 +1,3 @@
+http://blog.miguelgrinberg.com/post/restful-authentication-with-flask
+http://flask.pocoo.org/docs/0.10/blueprints/
+https://github.com/mitsuhiko/itsdangerous/blob/master/itsdangerous.py

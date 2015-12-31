@@ -29,3 +29,32 @@ https://github.com/miguelgrinberg/REST-auth/blob/master/api.py
 
 http://python-eve.org/authentication.html
 
+http://blog.luisrei.com/articles/flaskrest.html
+
+================
+
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from itsdangerous import (TimedJSONWebSignatureSerializer
+...                           as Serializer, BadSignature, SignatureExpired)
+>>> s = Serializer('abc',expires_in=300)
+>>> token = s.dumps('pwdkey');
+>>> token
+'eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ1MTUzMjQ3NiwiaWF0IjoxNDUxNTMyMTc2fQ.InB3ZGtleSI.De5_MmEq3Vv56xkbRMmpDYsU8i8mv61ZX9bFFgrutic'
+>>> len(token)
+122
+>>> type(token)
+<type 'str'>
+>>> s2=Serializer('abc');
+>>> data= s2.loads(token);
+>>> data
+u'pwdkey'
+>>> t2=s.dumps({'_id':'xver$5'})
+>>> t2
+'eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ1MTUzMjYyNywiaWF0IjoxNDUxNTMyMzI3fQ.eyJfaWQiOiJ4dmVyJDUifQ.ii8T14UsyrnXtKKy7dWjVurBIKEXY078q3NO-cmE9Ng'
+>>> len(t2)
+133
+>>> d2=s2.loads(t2)
+>>> d2
+{u'_id': u'xver$5'}
+
+
