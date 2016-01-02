@@ -30,7 +30,7 @@ class TestCase(unittest.TestCase):
             logger.debug('TestCase.setUp() -> fixtures=' + ','.join(self.fixtures))
 
         #TODO: add code here to populate test database with fixtures
- 
+
     def tearDown(self):
         '''
         method run when every test method terminates

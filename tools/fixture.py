@@ -5,6 +5,8 @@ import os, json, ast
 from nosql.mongo import DBManager
 
 from bson import ObjectId
+import bcrypt
+
 
 class JSONEncoder(json.JSONEncoder):
     def default(self, o):
@@ -63,6 +65,15 @@ class Fixture():
             
         return item
 
+    def set_password(self, username, password):
+        '''
+        set password for a user
+        '''
+        salt = bcrypt.gensalt()
+        password_hash_string = bcrypt.hashpw(password, salt)
+        db_handler = DBManager.get_connection()
+        db_handler[app_settings.AUTH_TABLE_NAME].update({'name': username}, {'$set': {'password': password_hash_string}})
+        
     def _encrypt_password(self, item):
         pass
 

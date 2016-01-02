@@ -23,6 +23,8 @@ if __name__=='__main__':
     group.add_argument('-i', metavar='collection_name', nargs='?', help='import collection data from json file')
     group.add_argument('-e', metavar='collection_name', nargs='?', help='export collection to json file')
     
+    
+    
     args = parser.parse_args()   
     
     fixture = Fixture()

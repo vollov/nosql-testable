@@ -62,8 +62,10 @@ LOGGING = {
         
         'app': {
             'handlers': ['debug.logfile', 'console'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'propagate': True,
         },
     },       
 }
+
+AUTH_TABLE_NAME='user'
