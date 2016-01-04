@@ -31,8 +31,12 @@ from itsdangerous import (TimedJSONWebSignatureSerializer
 from nosql.mongo import DBManager
 from bson import ObjectId
 from utils.json_util import JSONEncoder
-import bcrypt
+import bcrypt, json
 from flask import g
+
+
+import logging
+logger=logging.getLogger('app')
 
 class Authen():
     
@@ -62,11 +66,12 @@ class Authen():
     @staticmethod
     def get_user_by_id(id):
         '''
-        Query user by id
+        Query user by id, return user dict
         '''
         db_handler = DBManager.get_connection()
         user = db_handler[app_settings.AUTH_TABLE_NAME].find_one({"_id": ObjectId(id)})
         # translate  ObjectId(id) to string id
+        logger.debug('Authen.get_user_by_id()={0}'.format(type(user)))
         return user
     
     @staticmethod
@@ -98,7 +103,9 @@ class Authen():
         '''
         db_handler = DBManager.get_connection()
         user = db_handler[app_settings.AUTH_TABLE_NAME].find_one({'name': username})
-        if not user or not Authen.compare_password(user['password'], password):
+        db_hashed_password = str(user['password'])
+        logger.debug('authenticate user type={0}'.format(type(user)))
+        if not user or not Authen.compare_password(db_hashed_password, password):
             return None
         else:
             return user
