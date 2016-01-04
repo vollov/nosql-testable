@@ -41,7 +41,7 @@ class Authen():
         '''
         Generate the token by sign the user id, return signed string
         '''
-        signature_serializer = Serializer(app_settings['SECRET_KEY'], expires_in = expiration)
+        signature_serializer = Serializer(app_settings.SECRET_KEY, expires_in = expiration)
         return signature_serializer.dumps({ 'id': user_id })
 
     @staticmethod
@@ -49,7 +49,7 @@ class Authen():
         '''
         verfiy the token, and return the user object
         '''
-        signature_serializer = Serializer(app_settings['SECRET_KEY'])
+        signature_serializer = Serializer(app_settings.SECRET_KEY)
         try:
             data = signature_serializer.loads(token)
         except SignatureExpired:

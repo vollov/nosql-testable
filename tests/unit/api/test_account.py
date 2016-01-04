@@ -62,6 +62,7 @@ class TestAccount(TestCase):
     "_id": "56840a2db37b6c16a0ef1b6b", 
     "address": "66 king st, n2p 2e3", 
     "name": "martin", 
+    "password": "$2b$12$g4N.QUH073SqNZ2REt822uPOgvpmBGF318SnAwGL0fSq76fstJX2a",
     "phone": "416-223-1678"
   }
 }

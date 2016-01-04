@@ -35,7 +35,7 @@ def get_account(oid):
 @account_api.route('/api/v1.0/account', methods=['GET'])
 def get_accounts():
     db_handler = DBManager.get_connection()
-    cursor = db_handler['user'].find()
+    cursor = db_handler['user'].find(projection={'password':False})
     
     accounts = JsonUtil.listToStr(cursor)
     
