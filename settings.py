@@ -11,6 +11,8 @@ DEBUG = True
 UNIX = True
 PORT = 8000
 
+SECRET_KEY = 'demo_pwd'
+
 if UNIX:
     RESOURCE_ROOT='/opt/www/uw/'
 else:
