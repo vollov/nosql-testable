@@ -2,6 +2,9 @@ import json, ast
 from bson import ObjectId
 
 class JSONEncoder(json.JSONEncoder):
+    '''
+    convert ObjectId(_id) to str(_id)
+    '''
     def default(self, o):
         if isinstance(o, ObjectId):
             return str(o)

@@ -67,7 +67,7 @@ class Authen():
         db_handler = DBManager.get_connection()
         user = db_handler[app_settings.AUTH_TABLE_NAME].find_one({"_id": ObjectId(id)})
         # translate  ObjectId(id) to string id
-        return JSONEncoder().encode(user)
+        return user
     
     @staticmethod
     def set_password(username, password):
