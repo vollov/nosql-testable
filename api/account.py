@@ -14,7 +14,9 @@ DELETE     api/v1.0/account/[oid]        - Delete a account
 from flask import Blueprint, jsonify, abort, json
 from nosql.mongo import DBManager
 from bson import ObjectId
-from utils.json_util import JsonUtil
+from utils.json_util import JsonUtil,JSONEncoder
+
+from dao.user_dao import UserDao
 
 account_api = Blueprint('account_api', __name__)
 
@@ -34,20 +36,20 @@ def get_account(oid):
 
 @account_api.route('/api/v1.0/account', methods=['GET'])
 def get_accounts():
-    db_handler = DBManager.get_connection()
-    cursor = db_handler['user'].find(projection={'password':False})
+    #db_handler = DBManager.get_connection()
+    #cursor = db_handler['user'].find(projection={'password':False})
     
-    accounts = JsonUtil.listToStr(cursor)
-    
+    #accounts = JsonUtil.listToStr(cursor)
+    accounts = UserDao.get_users();
     #accounts = json.dumps(cursor)
-    return jsonify({'accounts': accounts})
+    return jsonify({'accounts': JSONEncoder().encode(accounts)})
 
 @account_api.route('/api/v1.0/public/account', methods=['GET'])
 def get_public_accounts():
-    db_handler = DBManager.get_connection()
-    cursor = db_handler['user'].find(projection=['_id','name'])
+    #db_handler = DBManager.get_connection()
+    #cursor = db_handler['user'].find(projection=['_id','name'])
 
-    accounts = JsonUtil.listToStr(cursor)
-
+    #accounts = JsonUtil.listToStr(cursor)
+    accounts = UserDao.get_users();
     #accounts = json.dumps(cursor)
     return jsonify({'accounts': accounts})

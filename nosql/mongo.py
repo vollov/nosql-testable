@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 import sys
 import settings as app_settings
 from pymongo import MongoClient
@@ -9,8 +10,9 @@ class DBManager():
     Manage the database connections
     
     Encoding: MongoDB stores data in BSON format. BSON strings are UTF-8 encoded
-    Unicode strings (<type ‘unicode’>) are encoded UTF-8 first.
+    Unicode strings (<type 'unicode'>) are encoded UTF-8 first.
     
+    query alway return a unicode dict
     '''
     
     #class level instance, gloable shared instances
