@@ -7,6 +7,10 @@ from pymongo.errors import ConnectionFailure
 class DBManager():
     '''
     Manage the database connections
+    
+    Encoding: MongoDB stores data in BSON format. BSON strings are UTF-8 encoded
+    Unicode strings (<type ‘unicode’>) are encoded UTF-8 first.
+    
     '''
     
     #class level instance, gloable shared instances
