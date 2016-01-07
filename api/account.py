@@ -11,7 +11,7 @@ PUT        api/v1.0/account/[oid]        - Update an existing account
 DELETE     api/v1.0/account/[oid]        - Delete a account
 '''
 
-from flask import Blueprint, jsonify, abort, json
+from flask import Blueprint, jsonify, abort, json,make_response 
 from nosql.mongo import DBManager
 from bson import ObjectId
 from utils.json_util import JsonUtil,JSONEncoder
@@ -42,7 +42,11 @@ def get_accounts():
     #accounts = JsonUtil.listToStr(cursor)
     accounts = UserDao.get_users();
     #accounts = json.dumps(cursor)
-    return jsonify({'accounts': JSONEncoder().encode(accounts)})
+    json_resp = jsonify({'accounts': JSONEncoder().encode(accounts)})
+    
+    res = make_response(json_resp, 200)
+    res.headers['Content-Type'] = 'text/json; charset=utf-8'
+    return res
 
 @account_api.route('/api/v1.0/public/account', methods=['GET'])
 def get_public_accounts():
